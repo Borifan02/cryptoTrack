@@ -15,8 +15,27 @@ mongoose.connect(MONGODB_URI, {
 
 const db = mongoose.connection;
 
+const cleanupLegacyIndexes = async () => {
+	try {
+		const usersCollection = mongoose.connection.collection("users");
+		const indexes = await usersCollection.indexes();
+		const hasLegacyEmailIndex = indexes.some(
+			(index) => index.name === "email_1"
+		);
+
+		if (hasLegacyEmailIndex) {
+			await usersCollection.dropIndex("email_1");
+			console.log("Dropped legacy users.email_1 unique index");
+		}
+	} catch (err) {
+		// Startup should continue even if index cleanup is unnecessary or blocked.
+		console.log("Index cleanup skipped:", err.message);
+	}
+};
+
 db.on("connected", () => {
 	console.log("Connected to DB");
+	cleanupLegacyIndexes();
 });
 
 db.on("error", (err) => {

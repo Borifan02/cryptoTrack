@@ -59,7 +59,20 @@ app.post("/register", async (req, res) => {
 			.status(200)
 			.json({ message: "User Registered Successfully" });
 	} catch (err) {
-		return res.status(500).json(err);
+		if (err.code === 11000) {
+			const duplicateKey = Object.keys(err.keyPattern || {})[0];
+			if (duplicateKey === "username") {
+				return res.status(409).json({ Error: "User Already Exists" });
+			}
+
+			if (duplicateKey === "email") {
+				return res.status(500).json({
+					Error: "Registration blocked by a legacy database index. Redeploy backend and retry.",
+				});
+			}
+		}
+
+		return res.status(500).json({ Error: "Registration failed" });
 	}
 });
 
