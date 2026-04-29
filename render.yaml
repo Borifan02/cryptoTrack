@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: cryptotrack-api
+    env: node
+    rootDir: Server
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    plan: free
