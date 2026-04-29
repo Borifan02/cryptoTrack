@@ -21,8 +21,8 @@ CryptoTrack is a web application that allows users to track real-time cryptocurr
 
 The application is deployed and publicly accessible:
 
-- **Frontend (Vercel):** [`https://cryptotrack-ultimez.vercel.app/`](https://cryptotrack-ultimez.vercel.app/)
-- **Backend (Render):** [`https://cryptotrack-rhun.onrender.com`](https://cryptotrack-rhun.onrender.com)
+- **Frontend (Vercel):** [`https://crypto-track-mauve-delta.vercel.app/`](https://crypto-track-mauve-delta.vercel.app/)
+- **Backend (Render):** [`https://cryptotrack-3mi5.onrender.com`](https://cryptotrack-3mi5.onrender.com)
 
 _Note: The backend is hosted on a free Render instance, so the initial server response might be slow as the instance "wakes up" from a sleep state._
 
